@@ -1,7 +1,7 @@
 package com.malik.newsreader.dataaccess.repository
 
 import com.malik.newsreader.dataaccess.DataState
-import com.malik.newsreader.dataaccess.models.NewsArticlesResponse
+import com.malik.newsreader.dataaccess.models.NewsArticle
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -10,6 +10,5 @@ import kotlinx.coroutines.flow.Flow
  * @author Malik Dawar, malikdawar@hotmail.com
  */
 interface NewsArticlesRepository {
-    suspend fun getAvailableNewsArticles(page: Int): Flow<DataState<NewsArticlesResponse>>
-
+    suspend fun getNewsArticles(page: Int): Flow<DataState<List<NewsArticle>>>
 }

@@ -1,16 +1,16 @@
 package com.malik.newsreader.ui.screens
 
 import androidx.lifecycle.ViewModel
-import com.malik.newsreader.dataaccess.models.NewsArticlesResponse
+import com.malik.newsreader.dataaccess.models.NewsArticle
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 class SharedViewModel : ViewModel() {
 
-    private val _selectedNewsArticle = MutableStateFlow<NewsArticlesResponse.Article?>(null)
-    val selectedNewsArticle: StateFlow<NewsArticlesResponse.Article?> = _selectedNewsArticle
+    private val _selectedNewsArticle = MutableStateFlow<NewsArticle?>(null)
+    val selectedNewsArticle: StateFlow<NewsArticle?> = _selectedNewsArticle
 
-    fun saveSelectedNewsArticle(article: NewsArticlesResponse.Article) {
+    fun setSelectedNewsArticle(article: NewsArticle) {
         _selectedNewsArticle.value = article
     }
 }

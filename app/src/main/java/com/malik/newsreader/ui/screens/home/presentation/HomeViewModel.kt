@@ -1,9 +1,9 @@
-package com.malik.newsreader.ui.screens.home.model
+package com.malik.newsreader.ui.screens.home.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.malik.newsreader.dataaccess.DataState
-import com.malik.newsreader.dataaccess.models.NewsArticlesResponse
+import com.malik.newsreader.dataaccess.models.NewsArticle
 import com.malik.newsreader.dataaccess.usecases.FetchNewsArticles
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -26,8 +26,8 @@ class HomeViewModel @Inject constructor(
     val homeUiState: StateFlow<HomeUiState> get() = _homeUiStateFlow
 
     private var _articlesListFlow =
-        MutableStateFlow<List<NewsArticlesResponse.Article>>(emptyList())
-    val articlesList: StateFlow<List<NewsArticlesResponse.Article>> get() = _articlesListFlow
+        MutableStateFlow<List<NewsArticle>>(emptyList())
+    val articlesList: StateFlow<List<NewsArticle>> get() = _articlesListFlow
 
     fun onIntent(intent: HomeScreenSideEvent) {
         when (intent) {
@@ -50,22 +50,22 @@ class HomeViewModel @Inject constructor(
                         if (page == 1) {
                             // First page
                             _homeUiStateFlow.value = ContentState
-                            _articlesListFlow.value = dataState.data.articles!!
+                            _articlesListFlow.value = dataState.data
                         } else {
                             // Any other page
                             _homeUiStateFlow.value = ContentNextPageState
 
-                            val currentList = arrayListOf<NewsArticlesResponse.Article>()
+                            val currentList = arrayListOf<NewsArticle>()
                             _articlesListFlow.value.let { currentList.addAll(it) }
                             dataState.data.let {
-                                currentList.addAll(it.articles!!)
+                                currentList.addAll(it)
                             }
                             _articlesListFlow.value = currentList
                         }
                     }
 
                     is DataState.Error -> {
-                        _homeUiStateFlow.value = ErrorState("dataState.message")
+                        _homeUiStateFlow.value = ErrorState(dataState.exception)
                     }
                 }
             }

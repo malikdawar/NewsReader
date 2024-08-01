@@ -1,4 +1,4 @@
-package com.malik.newsreader.dataaccess.models
+package com.malik.newsreader.dataaccess.remote.models
 
 
 import com.google.gson.annotations.SerializedName
@@ -27,11 +27,11 @@ data class NewsArticlesResponse(
         @SerializedName("url")
         val url: String?,
         @SerializedName("urlToImage")
-        val urlToImage: Any?
+        val urlToImage: String?
     ) {
         data class Source(
             @SerializedName("id")
-            val id: Any?,
+            val id: String?,
             @SerializedName("name")
             val name: String?
         )

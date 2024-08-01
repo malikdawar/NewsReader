@@ -1,9 +1,11 @@
 package com.malik.newsreader.dataaccess.repository
 
 import androidx.annotation.WorkerThread
-import com.malik.newsreader.common.noNetworkErrorMessage
+import com.malik.newsreader.common.extensions.noNetworkErrorMessage
+import com.malik.newsreader.common.extensions.nothingFound
 import com.malik.newsreader.dataaccess.DataState
-import com.malik.newsreader.dataaccess.models.NewsArticlesResponse
+import com.malik.newsreader.dataaccess.mappers.articleResponseToDomainModels
+import com.malik.newsreader.dataaccess.models.NewsArticle
 import com.malik.newsreader.dataaccess.remote.ApiInterface
 import com.malik.newsreader.dataaccess.remote.message
 import com.malik.newsreader.dataaccess.remote.onErrorSuspend
@@ -22,30 +24,28 @@ class NewsArticlesRepositoryImp @Inject constructor(
     private val apiService: ApiInterface
 ) : NewsArticlesRepository {
     @WorkerThread
-    override suspend fun getAvailableNewsArticles(page: Int): Flow<DataState<NewsArticlesResponse>> {
+    override suspend fun getNewsArticles(page: Int): Flow<DataState<List<NewsArticle>>> {
         return flow {
             apiService.loadNewsArticles(
                 query = "tech",
                 sortBy = "popularity",
-                pageSize = 10,
+                pageSize = 50,
                 page = page
             ).apply {
-                this.onSuccessSuspend {
-                    data?.let {
-                        emit(DataState.Success(it))
-                    }
+                onSuccessSuspend {
+                    // handle the case when the API request gets an error response.
+                    data?.articles?.let {
+                        emit(DataState.Success(it.articleResponseToDomainModels()))
+                    } ?: emit(DataState.Error<List<NewsArticle>>(nothingFound()))
                 }
-                // handle the case when the API request gets an error response.
-                // e.g. internal server error.
             }.onErrorSuspend {
-                emit(DataState.Error<NewsArticlesResponse>(message()))
-                // handle the case when the API request gets an exception response.
-                // e.g. network connection error.
+                emit(DataState.Error<List<NewsArticle>>(message()))
             }.onExceptionSuspend {
+                // handle the case when the API request gets an exception response.
                 if (this.exception is IOException) {
-                    emit(DataState.Error<NewsArticlesResponse>(noNetworkErrorMessage()))
+                    emit(DataState.Error<List<NewsArticle>>(noNetworkErrorMessage()))
                 } else {
-                    emit(DataState.Error<NewsArticlesResponse>(message()))
+                    emit(DataState.Error<List<NewsArticle>>(message()))
                 }
             }
         }

@@ -39,7 +39,7 @@ class NetworkApiModule {
             val requestBuilder = original.newBuilder()
                 .addHeader("Accept", "application/json")
                 .addHeader("Content-Type", "application/json")
-                .addHeader("X-Api-Key", "c9077262effa4cb88c07a3dbe3a72d48")
+                .addHeader("X-Api-Key", "844ea3d751854f30bdc3fa03518b7b9c") //todo; secure API key
 
             val request = requestBuilder.build()
             chain.proceed(request)
@@ -62,7 +62,7 @@ class NetworkApiModule {
 
     @Singleton
     @Provides
-    fun provideBooksApiService(retrofit: Retrofit): ApiInterface {
+    fun provideApiService(retrofit: Retrofit): ApiInterface {
         return retrofit.create(ApiInterface::class.java)
     }
 }

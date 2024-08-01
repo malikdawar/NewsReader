@@ -1,4 +1,5 @@
 package com.malik.newsreader.dataaccess.remote
+
 import retrofit2.Response
 
 sealed class ApiResponse<out T> {
@@ -9,7 +10,6 @@ sealed class ApiResponse<out T> {
 
     sealed class ApiFailureResponse<T> {
         data class Error<T>(val response: Response<T>) : ApiResponse<T>()
-
         data class Exception<T>(val exception: Throwable) : ApiResponse<T>() {
             val message: String? = exception.localizedMessage
         }
@@ -18,7 +18,6 @@ sealed class ApiResponse<out T> {
     companion object {
 
         fun <T> exception(ex: Throwable) = ApiFailureResponse.Exception<T>(ex)
-
         fun <T> error(response: Response<T>) = ApiFailureResponse.Error<T>(response)
 
         fun <T> create(

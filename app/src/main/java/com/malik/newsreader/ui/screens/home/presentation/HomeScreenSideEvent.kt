@@ -1,4 +1,4 @@
-package com.malik.newsreader.ui.screens.home.model
+package com.malik.newsreader.ui.screens.home.presentation
 
 sealed class HomeScreenSideEvent
 

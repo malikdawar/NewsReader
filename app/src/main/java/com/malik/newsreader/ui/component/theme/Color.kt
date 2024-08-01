@@ -1,4 +1,4 @@
-package com.malik.newsreader.ui.theme
+package com.malik.newsreader.ui.component.theme
 
 import androidx.compose.ui.graphics.Color
 

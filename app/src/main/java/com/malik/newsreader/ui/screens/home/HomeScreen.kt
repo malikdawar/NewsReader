@@ -12,7 +12,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import com.malik.newsreader.dataaccess.models.NewsArticlesResponse
+import com.malik.newsreader.ui.component.NavigationScreen
 import com.malik.newsreader.ui.component.NewArticlesList
 import com.malik.newsreader.ui.component.ProgressDialog
 import com.malik.newsreader.ui.screens.SharedViewModel
@@ -30,12 +32,11 @@ import kotlinx.coroutines.flow.collectLatest
  */
 
 @Composable
-internal fun HomeScreen(
+fun HomeScreen(
     sharedViewModel: SharedViewModel,
+    navController: NavHostController,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
-    val context = LocalContext.current
-
     val isLoading = remember { mutableStateOf(false) }
     val articles = remember { mutableStateListOf<NewsArticlesResponse.Article>() }
 
@@ -55,7 +56,7 @@ internal fun HomeScreen(
     Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
         NewArticlesList(articles = articles, viewModel = viewModel) {
             sharedViewModel.saveSelectedNewsArticle(it)
-            //todo: navigator.navigate(NavigationScreen.Detail.route)
+            navController.navigate(NavigationScreen.DetailsScreen.route)
         }
 
         ProgressDialog(isLoading.value)

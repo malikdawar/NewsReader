@@ -1,4 +1,4 @@
-package com.malik.newsreader.ui.theme
+package com.malik.newsreader.ui.component.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

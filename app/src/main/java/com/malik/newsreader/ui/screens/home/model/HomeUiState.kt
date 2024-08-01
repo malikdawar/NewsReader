@@ -1,8 +1,8 @@
 package com.malik.newsreader.ui.screens.home.model
 
-internal sealed class HomeUiState
+sealed class HomeUiState
 
-internal data object LoadingState : HomeUiState()
-internal data object ContentState : HomeUiState()
-internal data object ContentNextPageState : HomeUiState()
-internal class ErrorState(val message: String) : HomeUiState()
+data object LoadingState : HomeUiState()
+data object ContentState : HomeUiState()
+data object ContentNextPageState : HomeUiState()
+class ErrorState(val message: String) : HomeUiState()

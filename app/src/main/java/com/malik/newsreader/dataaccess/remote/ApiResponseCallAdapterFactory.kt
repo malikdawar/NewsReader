@@ -23,9 +23,11 @@ class ApiResponseCallAdapterFactory : CallAdapter.Factory() {
                     val responseType = getParameterUpperBound(0, callType as ParameterizedType)
                     ApiResponseCallBackAdapter(responseType)
                 }
+
                 else -> null
             }
         }
+
         else -> null
     }
 }

@@ -44,16 +44,13 @@ class NewsArticlesRepositoryTest {
                     )
                 )
             )
-
             coEvery { apiService.loadNewsArticles(any(), any(), any(), any()) } returns apiResponse
 
             // When
             val result =
                 sut.getNewsArticles(page = 1, sortBy = sortBy).toList()
-
             // Then
             assert(result.first() is DataState.Success)
-
             val successState = result.first() as DataState.Success
             assertEquals(1, successState.data.size)
         }

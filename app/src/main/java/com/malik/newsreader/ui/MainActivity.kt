@@ -13,8 +13,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.malik.newsreader.ui.component.NavigationGraph
-import com.malik.newsreader.ui.screens.SharedViewModel
 import com.malik.newsreader.ui.component.theme.AppTheme
+import com.malik.newsreader.ui.screens.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 /**

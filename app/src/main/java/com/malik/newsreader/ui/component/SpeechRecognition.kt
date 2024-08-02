@@ -4,9 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.speech.RecognitionListener
+import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
 import android.speech.SpeechRecognizer.createSpeechRecognizer
-import android.speech.RecognizerIntent
 import android.widget.Toast
 
 /**
@@ -36,7 +36,8 @@ class SpeechRecognition(
             override fun onBufferReceived(buffer: ByteArray?) {}
             override fun onEndOfSpeech() {}
             override fun onError(error: Int) {
-                Toast.makeText(context, "Speech recognition error: $error", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Speech recognition error: $error", Toast.LENGTH_SHORT)
+                    .show()
             }
 
             override fun onResults(results: Bundle?) {

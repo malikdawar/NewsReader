@@ -89,13 +89,4 @@ dependencies {
     testImplementation(libs.androidx.core.testing)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.kotlinx.coroutines.test.jvm)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    //noinspection UseTomlInstead
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
-    //noinspection UseTomlInstead
-    debugImplementation("androidx.compose.ui:ui-tooling")
-    //noinspection UseTomlInstead
-    debugImplementation("androidx.compose.ui:ui-test-manifest")
 }

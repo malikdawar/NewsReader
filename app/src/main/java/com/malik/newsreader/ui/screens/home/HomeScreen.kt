@@ -1,7 +1,6 @@
 package com.malik.newsreader.ui.screens.home
 
 import android.Manifest
-import android.content.pm.PackageManager
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -11,17 +10,23 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.malik.newsreader.R
 import com.malik.newsreader.common.Const.COMMAND_RELOAD
+import com.malik.newsreader.common.PermissionManager.hasAudioPermission
 import com.malik.newsreader.common.extensions.showToast
 import com.malik.newsreader.dataaccess.models.NewsArticle
 import com.malik.newsreader.ui.component.NavigationScreen
@@ -51,21 +56,8 @@ fun HomeScreen(
     val isLoading = remember { mutableStateOf(true) }
     val articles = remember { mutableStateListOf<NewsArticle>() }
     val sortOptions = viewModel.sortOptions
-    val context = LocalContext.current
     val selectedSortByOption by viewModel.sortBy.collectAsState(initial = null)
-
-    LaunchedEffect(Unit) {
-        viewModel.onIntent(GetArticles(sortOptions[0]))
-    }
-
-    LaunchedEffect(viewModel.articlesList) {
-        viewModel.articlesList.collectLatest {
-            if (it.isNotEmpty()) {
-                articles.clear()
-                articles.addAll(it)
-            }
-        }
-    }
+    val context = LocalContext.current
 
     val speechRecognitionManager = remember {
         SpeechRecognition(context) { text ->
@@ -86,6 +78,19 @@ fun HomeScreen(
         }
     }
 
+    LaunchedEffect(Unit) {
+        viewModel.onIntent(GetArticles(sortOptions[0]))
+    }
+
+    LaunchedEffect(viewModel.articlesList) {
+        viewModel.articlesList.collectLatest {
+            if (it.isNotEmpty()) {
+                articles.clear()
+                articles.addAll(it)
+            }
+        }
+    }
+
     Box(modifier = Modifier.fillMaxSize()) {
         Column {
             ToolBarDropDownMenu(options = sortOptions) {
@@ -100,11 +105,7 @@ fun HomeScreen(
 
         FloatingActionButton(
             onClick = {
-                if (ContextCompat.checkSelfPermission(
-                        context,
-                        Manifest.permission.RECORD_AUDIO
-                    ) == PackageManager.PERMISSION_GRANTED
-                ) {
+                if (hasAudioPermission(context)) {
                     context.showToast("Listening......")
                     speechRecognitionManager.startListening()
                 } else {

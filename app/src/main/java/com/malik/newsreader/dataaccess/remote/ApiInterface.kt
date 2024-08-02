@@ -11,7 +11,7 @@ import retrofit2.http.Query
 interface ApiInterface {
     @GET(SERVICE_API)
     suspend fun loadNewsArticles(
-        @Query("q") query: String = "tech",
+        @Query("q") query: String,
         @Query("sortBy") sortBy: String,
         @Query("pageSize") pageSize: Int,
         @Query("page") page: Int

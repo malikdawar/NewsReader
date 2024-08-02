@@ -5,6 +5,7 @@ import com.malik.newsreader.dataaccess.DataState
 import com.malik.newsreader.dataaccess.remote.ApiInterface
 import com.malik.newsreader.dataaccess.remote.ApiResponse
 import com.malik.newsreader.dataaccess.remote.response_models.NewsArticlesResponse
+import com.malik.newsreader.dataaccess.repository.NewsArticlesRepository
 import com.malik.newsreader.dataaccess.repository.NewsArticlesRepositoryImp
 import io.mockk.coEvery
 import io.mockk.mockk
@@ -20,7 +21,7 @@ import retrofit2.Response
 @RunWith(JUnit4::class)
 class NewsArticlesRepositoryTest {
 
-    private lateinit var sut: NewsArticlesRepositoryImp
+    private lateinit var sut: NewsArticlesRepository
     private val apiService: ApiInterface = mockk()
 
     @Before

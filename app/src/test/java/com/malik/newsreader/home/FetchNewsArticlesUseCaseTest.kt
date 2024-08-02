@@ -32,7 +32,7 @@ class FetchNewsArticlesUseCaseTest {
     }
 
     @Test
-    fun `given when the invoke in FetchNewsArticlesUseCase is called then it fetch the articles`() =
+    fun `given when the invoke in FetchNewsArticlesUseCase is invoked, then it fetch the articles`() =
         runBlocking {
             // Given
             val sut = FetchNewsArticlesUseCase(repository)

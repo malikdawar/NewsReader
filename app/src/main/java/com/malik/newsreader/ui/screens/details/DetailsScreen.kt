@@ -30,16 +30,6 @@ import com.skydoves.landscapist.coil3.CoilImage
  * @author Malik Dawar, malikdawar@hotmail.com
  */
 @Composable
-fun NewsDetailScreen(sharedViewModel: SharedViewModel) {
-    val selectedArticle by sharedViewModel.selectedArticle.collectAsState(initial = null)
-
-    selectedArticle?.let { article ->
-        DetailScreen(article)
-    }
-}
-
-
-@Composable
 fun DetailScreen(article: NewsArticle) {
     Card(
         modifier = Modifier
@@ -49,8 +39,7 @@ fun DetailScreen(article: NewsArticle) {
         elevation = CardDefaults.cardElevation(8.dp)
     ) {
         Column(
-            modifier = Modifier.padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+            modifier = Modifier.padding(16.dp), horizontalAlignment = Alignment.CenterHorizontally
         ) {
             // Shimmer effect for the image
             val imageModifier = Modifier
@@ -59,25 +48,19 @@ fun DetailScreen(article: NewsArticle) {
                 .shimmerBackground(shape = RoundedCornerShape(16.dp))
 
             if (article.urlToImage != null) {
-                CoilImage(
-                    imageModel = { article.urlToImage },
-                    modifier = imageModifier,
-                    loading = {
-                        Box(modifier = imageModifier) {}
-                    }
-                )
+                CoilImage(imageModel = { article.urlToImage }, modifier = imageModifier, loading = {
+                    Box(modifier = imageModifier) {}
+                })
             } else {
                 Box(modifier = imageModifier) {}
             }
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Shimmer effect for text elements
             Text(
                 text = article.title,
                 style = MaterialTheme.typography.headlineSmall,
-                modifier = Modifier
-                    .padding(bottom = 8.dp),
+                modifier = Modifier.padding(bottom = 8.dp),
                 textAlign = TextAlign.Center
             )
 
@@ -87,7 +70,6 @@ fun DetailScreen(article: NewsArticle) {
                 color = MaterialTheme.colorScheme.primary,
                 modifier = Modifier
                     .padding(bottom = 8.dp)
-                    .shimmerBackground()
             )
 
             Text(
@@ -96,14 +78,22 @@ fun DetailScreen(article: NewsArticle) {
                 color = MaterialTheme.colorScheme.secondary,
                 modifier = Modifier
                     .padding(bottom = 16.dp)
-                    .shimmerBackground()
             )
 
             Text(
                 text = article.description.orEmpty(),
                 style = MaterialTheme.typography.bodyMedium,
-                modifier = Modifier
-                    .padding(bottom = 16.dp),
+                modifier = Modifier.padding(bottom = 16.dp),
+                textAlign = TextAlign.Justify,
+                lineHeight = 20.sp,
+                overflow = TextOverflow.Ellipsis,
+                maxLines = 6
+            )
+
+            Text(
+                text = article.content.orEmpty(),
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier.padding(bottom = 16.dp),
                 textAlign = TextAlign.Justify,
                 lineHeight = 20.sp,
                 overflow = TextOverflow.Ellipsis,
@@ -113,3 +103,11 @@ fun DetailScreen(article: NewsArticle) {
     }
 }
 
+@Composable
+fun NewsDetailScreen(sharedViewModel: SharedViewModel) {
+    val selectedArticle by sharedViewModel.selectedArticle.collectAsState(initial = null)
+
+    selectedArticle?.let { article ->
+        DetailScreen(article)
+    }
+}

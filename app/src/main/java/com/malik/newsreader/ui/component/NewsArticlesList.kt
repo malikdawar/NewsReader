@@ -66,6 +66,7 @@ fun NewsArticlesList(
                                 ), modifier = Modifier
                                     .height(200.dp)
                                     .fillMaxWidth()
+                                    .shimmerBackground(shape = RoundedCornerShape(16.dp))
                             )
                         }
                         Text(

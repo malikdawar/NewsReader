@@ -16,6 +16,7 @@ fun NewsArticlesResponse.Article.toDomainModel(): NewsArticle? {
         title = title,
         author = author ?: "Unknown Author",
         description = description,
+        content = content,
         publishedAt = publishedAt,
         source = source?.name ?: "Unknown Source",
         urlToImage = urlToImage

@@ -5,4 +5,5 @@ object Const {
     const val REQUEST_TIMEOUT = 60
     const val SEARCH_QUERY = "tech"
     const val PAGE_SIZE = 50
+    const val COMMAND_RELOAD = "reload"
 }

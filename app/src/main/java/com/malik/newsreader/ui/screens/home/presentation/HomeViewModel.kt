@@ -31,6 +31,7 @@ class HomeViewModel @Inject constructor(
 
     val sortOptions = listOf("relevancy", "popularity", "publishedAt")
     private val _sortBy = MutableStateFlow(sortOptions[0])
+    val sortBy: StateFlow<String> get() = _sortBy
 
     fun onIntent(intent: HomeScreenSideEvent) {
         when (intent) {

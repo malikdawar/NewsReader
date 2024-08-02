@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.malik.newsreader.dataaccess.DataState
 import com.malik.newsreader.dataaccess.models.NewsArticle
-import com.malik.newsreader.dataaccess.usecases.FetchNewsArticles
+import com.malik.newsreader.dataaccess.usecases.FetchNewsArticlesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -16,10 +16,9 @@ import javax.inject.Inject
  * The [HomeViewModel].kt is viewmodel for HomeUi to do all the UI/logical operations
  * @author Malik Dawar, malikdawar@hotmail.com
  */
-
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val fetchArticlesUseCase: FetchNewsArticles
+    private val fetchArticlesUseCase: FetchNewsArticlesUseCase
 ) : ViewModel() {
     private var pageNumber = 1
     private val _homeUiStateFlow = MutableStateFlow<HomeUiState>(LoadingState)

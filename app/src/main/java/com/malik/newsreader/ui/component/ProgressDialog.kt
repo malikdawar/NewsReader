@@ -13,7 +13,6 @@ import androidx.compose.ui.unit.dp
  * The [ProgressDialog].kt to handle the progress while async in progress
  * @author Malik Dawar, malikdawar@hotmail.com
  */
-
 @Composable
 fun ProgressDialog(isVisible: Boolean) {
     if (isVisible) {

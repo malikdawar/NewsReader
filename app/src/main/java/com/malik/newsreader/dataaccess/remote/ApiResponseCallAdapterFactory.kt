@@ -6,8 +6,11 @@ import retrofit2.Retrofit
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 
+/**
+ * The [ApiResponseCallAdapterFactory].kt the Home UI component
+ * @author Malik Dawar, malikdawar@hotmail.com
+ */
 class ApiResponseCallAdapterFactory : CallAdapter.Factory() {
-
     override fun get(
         returnType: Type,
         annotations: Array<Annotation>,

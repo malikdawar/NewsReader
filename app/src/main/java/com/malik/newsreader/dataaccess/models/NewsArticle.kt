@@ -1,5 +1,9 @@
 package com.malik.newsreader.dataaccess.models
 
+/**
+ * The [NewsArticle].kt the Home UI component
+ * @author Malik Dawar, malikdawar@hotmail.com
+ */
 data class NewsArticle(
     val title: String,
     val author: String,

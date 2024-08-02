@@ -9,6 +9,10 @@ import android.speech.SpeechRecognizer.createSpeechRecognizer
 import android.speech.RecognizerIntent
 import android.widget.Toast
 
+/**
+ * The [SpeechRecognition].kt the Home UI component
+ * @author Malik Dawar, malikdawar@hotmail.com
+ */
 class SpeechRecognition(
     private val context: Context,
     private val onResult: (String) -> Unit

@@ -2,6 +2,10 @@ package com.malik.newsreader.dataaccess.remote
 
 import retrofit2.Response
 
+/**
+ * The [ApiResponse].kt the Home UI component
+ * @author Malik Dawar, malikdawar@hotmail.com
+ */
 sealed class ApiResponse<out T> {
 
     data class ApiSuccessResponse<T>(val response: Response<T>) : ApiResponse<T>() {
@@ -16,7 +20,6 @@ sealed class ApiResponse<out T> {
     }
 
     companion object {
-
         fun <T> exception(ex: Throwable) = ApiFailureResponse.Exception<T>(ex)
         fun <T> error(response: Response<T>) = ApiFailureResponse.Error<T>(response)
 

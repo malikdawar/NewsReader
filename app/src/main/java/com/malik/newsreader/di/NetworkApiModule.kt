@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 /**
- * The Module to provide the instances of [OkHttpClient], [Retrofit], and [ApiInterface] classes.
+ * The [NetworkApiModule] to provide the instances of [OkHttpClient], [Retrofit], and [ApiInterface] classes.
  * @author Malik Dawar
  */
 @Module

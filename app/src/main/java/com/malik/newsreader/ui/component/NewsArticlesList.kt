@@ -33,6 +33,10 @@ import com.skydoves.landscapist.coil3.CoilImage
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+/**
+ * The [NewsArticlesList].kt the Home UI component
+ * @author Malik Dawar, malikdawar@hotmail.com
+ */
 @Composable
 fun NewsArticlesList(
     articles: List<NewsArticle>,

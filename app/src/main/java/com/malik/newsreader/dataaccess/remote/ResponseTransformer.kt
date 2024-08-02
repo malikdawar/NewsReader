@@ -1,6 +1,11 @@
 package com.malik.newsreader.dataaccess.remote
 
 /**
+ * The [ResponseTransformar].kt the Home UI component
+ * @author Malik Dawar, malikdawar@hotmail.com
+ */
+
+/**
  * A suspend function for handling success response.
  */
 @SuspensionFunction

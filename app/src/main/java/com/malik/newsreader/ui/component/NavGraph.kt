@@ -8,6 +8,10 @@ import com.malik.newsreader.ui.screens.SharedViewModel
 import com.malik.newsreader.ui.screens.details.NewsDetailScreen
 import com.malik.newsreader.ui.screens.home.HomeScreen
 
+/**
+ * The [NavigationGraph].kt the Home UI component
+ * @author Malik Dawar, malikdawar@hotmail.com
+ */
 @Composable
 fun NavigationGraph(
     navController: NavHostController,

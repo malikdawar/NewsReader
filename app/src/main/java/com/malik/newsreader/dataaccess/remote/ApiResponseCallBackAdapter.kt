@@ -9,9 +9,13 @@ import retrofit2.Response
 import java.lang.reflect.Type
 
 /**
+ *
+ * The [ApiResponseCallBackAdapter].kt the Home UI component
+ *  @author Malik Dawar, malikdawar@hotmail.com
+ *
  * A Retrofit adapter that converts the Call into a ApiResponse
  */
-class ApiResponseCallBackAdapter constructor(
+class ApiResponseCallBackAdapter(
     private val responseType: Type
 ) : CallAdapter<Type, Call<ApiResponse<Type>>> {
 

@@ -38,6 +38,10 @@ import com.malik.newsreader.ui.screens.home.presentation.HomeViewModel
 import com.malik.newsreader.ui.screens.home.presentation.LoadingState
 import kotlinx.coroutines.flow.collectLatest
 
+/**
+ * The [HomeScreen].kt the Home UI component
+ * @author Malik Dawar, malikdawar@hotmail.com
+ */
 @Composable
 fun HomeScreen(
     sharedVM: SharedViewModel,

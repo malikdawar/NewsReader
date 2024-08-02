@@ -17,6 +17,10 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.TileMode
 
+/**
+ * The [ShimmerBackground].kt the Home UI component
+ * @author Malik Dawar, malikdawar@hotmail.com
+ */
 fun Modifier.shimmerBackground(shape: Shape = RectangleShape): Modifier = composed {
     val transition = rememberInfiniteTransition(label = "Loading")
     val translateAnimation by transition.animateFloat(

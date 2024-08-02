@@ -13,7 +13,6 @@ import javax.inject.Singleton
  * [RepositoryModule].kt to handle the DI for repos
  * * @author Malik Dawar, malikdawar@hotmail.com
  */
-
 @Module
 @InstallIn(SingletonComponent::class)
 object RepositoryModule {

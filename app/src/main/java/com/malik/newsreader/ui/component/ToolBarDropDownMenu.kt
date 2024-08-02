@@ -20,6 +20,10 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.res.painterResource
 import com.malik.newsreader.R
 
+/**
+ * The [ToolBarDropDownMenu].kt the Home UI component
+ * @author Malik Dawar, malikdawar@hotmail.com
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ToolBarDropDownMenu(

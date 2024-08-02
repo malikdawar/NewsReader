@@ -21,7 +21,6 @@ import dagger.hilt.android.AndroidEntryPoint
  * The [MainActivity].kt the single activity of the project
  * @author Malik Dawar, malikdawar@hotmail.com
  */
-
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

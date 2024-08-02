@@ -1,8 +1,11 @@
 package com.malik.newsreader.dataaccess.remote.response_models
 
-
 import com.google.gson.annotations.SerializedName
 
+/**
+ * The [NewsArticlesResponse].kt the Home UI component
+ * @author Malik Dawar, malikdawar@hotmail.com
+ */
 data class NewsArticlesResponse(
     @SerializedName("articles")
     val articles: List<Article>?,

@@ -5,6 +5,10 @@ import android.content.Context
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 
+/**
+ * The [PermissionManager].kt the Home UI component
+ * @author Malik Dawar, malikdawar@hotmail.com
+ */
 class PermissionManager(private val context: Context) {
 
     companion object {

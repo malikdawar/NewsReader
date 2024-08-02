@@ -11,5 +11,6 @@ import javax.inject.Inject
 class FetchNewsArticles @Inject constructor(
     private val repository: NewsArticlesRepository,
 ) {
-    suspend operator fun invoke(pageNumber: Int) = repository.getNewsArticles(pageNumber)
+    suspend operator fun invoke(pageNumber: Int, sortBy: String) =
+        repository.getNewsArticles(pageNumber, sortBy)
 }

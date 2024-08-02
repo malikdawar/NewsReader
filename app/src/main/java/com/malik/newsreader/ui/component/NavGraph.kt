@@ -5,7 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.malik.newsreader.ui.screens.SharedViewModel
-import com.malik.newsreader.ui.screens.details.DetailsScreen
+import com.malik.newsreader.ui.screens.details.NewsDetailScreen
 import com.malik.newsreader.ui.screens.home.HomeScreen
 
 @Composable
@@ -23,7 +23,7 @@ fun NavigationGraph(
         composable(
             route = NavigationScreen.DetailsScreen.route,
         ) {
-            DetailsScreen(sharedViewModel)
+            NewsDetailScreen(sharedViewModel)
         }
     }
 }

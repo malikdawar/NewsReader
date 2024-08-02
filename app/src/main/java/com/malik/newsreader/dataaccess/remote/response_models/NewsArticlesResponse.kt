@@ -1,4 +1,4 @@
-package com.malik.newsreader.dataaccess.remote.models
+package com.malik.newsreader.dataaccess.remote.response_models
 
 
 import com.google.gson.annotations.SerializedName

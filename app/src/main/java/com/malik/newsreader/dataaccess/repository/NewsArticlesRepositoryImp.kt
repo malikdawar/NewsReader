@@ -1,6 +1,8 @@
 package com.malik.newsreader.dataaccess.repository
 
 import androidx.annotation.WorkerThread
+import com.malik.newsreader.common.Const.PAGE_SIZE
+import com.malik.newsreader.common.Const.SEARCH_QUERY
 import com.malik.newsreader.common.extensions.noNetworkErrorMessage
 import com.malik.newsreader.common.extensions.nothingFound
 import com.malik.newsreader.dataaccess.DataState
@@ -24,12 +26,15 @@ class NewsArticlesRepositoryImp @Inject constructor(
     private val apiService: ApiInterface
 ) : NewsArticlesRepository {
     @WorkerThread
-    override suspend fun getNewsArticles(page: Int): Flow<DataState<List<NewsArticle>>> {
+    override suspend fun getNewsArticles(
+        page: Int,
+        sortBy: String
+    ): Flow<DataState<List<NewsArticle>>> {
         return flow {
             apiService.loadNewsArticles(
-                query = "tech",
-                sortBy = "popularity",
-                pageSize = 50,
+                query = SEARCH_QUERY,
+                sortBy = sortBy,
+                pageSize = PAGE_SIZE,
                 page = page
             ).apply {
                 onSuccessSuspend {

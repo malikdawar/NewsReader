@@ -10,5 +10,5 @@ import kotlinx.coroutines.flow.Flow
  * @author Malik Dawar, malikdawar@hotmail.com
  */
 interface NewsArticlesRepository {
-    suspend fun getNewsArticles(page: Int): Flow<DataState<List<NewsArticle>>>
+    suspend fun getNewsArticles(page: Int, sortBy: String): Flow<DataState<List<NewsArticle>>>
 }

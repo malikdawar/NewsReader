@@ -29,9 +29,13 @@ class HomeViewModel @Inject constructor(
         MutableStateFlow<List<NewsArticle>>(emptyList())
     val articlesList: StateFlow<List<NewsArticle>> get() = _articlesListFlow
 
+    val sortOptions = listOf("relevancy", "popularity", "publishedAt")
+    private val _sortBy = MutableStateFlow(sortOptions[0])
+
     fun onIntent(intent: HomeScreenSideEvent) {
         when (intent) {
             is GetArticles -> {
+                onSortOptionSelected(intent.sortBy)
                 fetchArticles(page = pageNumber)
             }
 
@@ -44,32 +48,37 @@ class HomeViewModel @Inject constructor(
     private fun fetchArticles(page: Int) {
         viewModelScope.launch {
             _homeUiStateFlow.value = LoadingState
-            fetchArticlesUseCase.invoke(pageNumber = page).collectLatest { dataState ->
-                when (dataState) {
-                    is DataState.Success -> {
-                        if (page == 1) {
-                            // First page
-                            _homeUiStateFlow.value = ContentState
-                            _articlesListFlow.value = dataState.data
-                        } else {
-                            // Any other page
-                            _homeUiStateFlow.value = ContentNextPageState
+            fetchArticlesUseCase.invoke(pageNumber = page, sortBy = _sortBy.value)
+                .collectLatest { dataState ->
+                    when (dataState) {
+                        is DataState.Success -> {
+                            if (page == 1) {
+                                // First page
+                                _homeUiStateFlow.value = ContentState
+                                _articlesListFlow.value = dataState.data
+                            } else {
+                                // Any other page
+                                _homeUiStateFlow.value = ContentNextPageState
 
-                            val currentList = arrayListOf<NewsArticle>()
-                            _articlesListFlow.value.let { currentList.addAll(it) }
-                            dataState.data.let {
-                                currentList.addAll(it)
+                                val currentList = arrayListOf<NewsArticle>()
+                                _articlesListFlow.value.let { currentList.addAll(it) }
+                                dataState.data.let {
+                                    currentList.addAll(it)
+                                }
+                                _articlesListFlow.value = currentList
                             }
-                            _articlesListFlow.value = currentList
+                        }
+
+                        is DataState.Error -> {
+                            _homeUiStateFlow.value = ErrorState(dataState.exception)
                         }
                     }
-
-                    is DataState.Error -> {
-                        _homeUiStateFlow.value = ErrorState(dataState.exception)
-                    }
                 }
-            }
         }
+    }
+
+    private fun onSortOptionSelected(sortBy: String) {
+        _sortBy.value = sortBy
     }
 
     private fun loadMoreArticles() {

@@ -7,10 +7,10 @@ import kotlinx.coroutines.flow.StateFlow
 
 class SharedViewModel : ViewModel() {
 
-    private val _selectedNewsArticle = MutableStateFlow<NewsArticle?>(null)
-    val selectedNewsArticle: StateFlow<NewsArticle?> = _selectedNewsArticle
+    private val _selectedArticle = MutableStateFlow<NewsArticle?>(null)
+    val selectedArticle: StateFlow<NewsArticle?> = _selectedArticle
 
-    fun setSelectedNewsArticle(article: NewsArticle) {
-        _selectedNewsArticle.value = article
+    fun setArticle(article: NewsArticle) {
+        _selectedArticle.value = article
     }
 }
